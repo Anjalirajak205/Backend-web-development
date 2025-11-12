@@ -67,6 +67,7 @@
 
 // let arr = ["cat", "dog", "cat", "dog"]
 
+
 // // Path parameter
 // // app.get('/:ani',(req,res)=>{
 // //     let {ani} = req.params
@@ -87,7 +88,7 @@
 //     let val = req.body //Its initial value will be undefined. To see the data which we send by using body we have to use app.use(express.json())
 //     console.log(val);
 //     res.send(val)
-// })
+// })                     
 
 // 07 november
 
@@ -136,14 +137,21 @@ app.post('/create', async (req, res) => {
    //   console.log(userName,email, passWord);
 })
 
-app.listen(4000, () => {
-   console.log("server running on port no 7000");
+// app.listen(4000, () => {
+//    console.log("server running on port no 7000");
 
-})
+// })
+
+
+
+// use dbs
 
 
 // Commands:
 // npm init
-// nom i express
+// npm i express
 // npm i -g nodemon
 // npx nodemon start
+// mongosh
+// npm i mongoose
+
