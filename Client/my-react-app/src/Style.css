@@ -1,9 +1,9 @@
 *{
     margin: 0;
     padding: 0;
+    background-color: lavender;
     font-family: sans-serif;
 }
-
 .mainDiv{
     display: flex;
     justify-content: center;
@@ -20,7 +20,7 @@ fieldset{
     align-items: center;
     flex-direction: column;
     border-radius: 8px;
-    background-color: rgb(72, 159, 240);
+    background-color: rgb(114, 68, 100);
 }
 
 input{
@@ -35,6 +35,9 @@ button{
     height: 30px;
     font-size: 18px;
     border-radius: 8px;
+    background-color:black;
+    color: white;
+    
 }
 
 #linkTag{
