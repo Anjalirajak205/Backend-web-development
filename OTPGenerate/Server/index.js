@@ -3,6 +3,8 @@ let express = require('express')
 let cors = require('cors')
 const sendOtp = require('./twilioServices')
 // const sendOtp = require('./twilioServices')
+const Otp = require('./OtpSchema');
+const mongoose = require('mongoose')
 
 let app = express()
 app.use(cors())
@@ -13,16 +15,57 @@ app.use(express.json())
 //    })
 
 
+// app.post('/sendOtp', async (req, res) => {
+//    const {phoneNumber} = req.body;
+//    const otp = Math.floor(100000 + Math.random() * 900000);
+//    try{
+//       await sendOtp(phoneNumber, otp);
+//     //   sendOtp
+//       res.status(200).send({message: 'OTP sent successfully', otp});
+//    }
+//    catch(error){
+//       res.status(500).send({error: 'Failed to send OTP'})
+//    }
+// })
+mongoose.connect("mongodb://127.0.0.1:27017/OtpSchema")
+
 app.post('/sendOtp', async (req, res) => {
    const {phoneNumber} = req.body;
    const otp = Math.floor(100000 + Math.random() * 900000);
+   const expiresAt = new Date(Date.now() + 1 * 60 * 1000);
    try{
       await sendOtp(phoneNumber, otp);
-    //   sendOtp
+
+      const newOtp = new Otp({
+         phoneNumber,
+         otp,
+         expiresAt:expiresAt.toString()
+      });
+      await newOtp.save();
+
       res.status(200).send({message: 'OTP sent successfully', otp});
    }
    catch(error){
       res.status(500).send({error: 'Failed to send OTP'})
+   }
+})
+
+app.post('/verify', async (req,res)=>{
+   const {otp} = req.body;
+   try{
+      const otpInfo = await Otp.findOne({otp});
+      if(!otpInfo){
+         return res.status(400).send("Otp is Invalid");
+      }
+      const currTime = new Date();
+      if(currTime > otpInfo.expiresAt){
+         return res.status(400).send("Otp has expired");
+      }
+      res.status(200).send("Otp verified successfully");
+      await Otp.deleteOne({_id: otpInfo._id});
+   }
+   catch(error){
+      return res.status(400).send("An error occured");
    }
 })
 

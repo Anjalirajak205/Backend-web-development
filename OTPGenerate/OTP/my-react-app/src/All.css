@@ -10,7 +10,7 @@ h1{
     text-align: center;
 }
 
-#top{
+#top, #bottom{
     width: 100vw;
     height: 200px;
     display: flex;

@@ -5,6 +5,9 @@ let cors = require('cors')
 let User = require('./user')
 let bcrypt = require('bcrypt')
 
+// const Otp = require('./OtpSchema');
+// const mongoose = require('mongoose')
+
 
 // npm i mongoose
 // npm i bcrypt
@@ -12,7 +15,8 @@ let bcrypt = require('bcrypt')
 let app = express()
 app.use(cors())
 app.use(express.json())
-mongoose.connect("mongodb://127.0.0.1:27017/5thSem").
+// mongoose.connect("mongodb://127.0.0.1:27017/5thSem").
+   mongoose.connect("mongodb://127.0.0.1:27017/OtpSchema")
    then(() => {
       console.log("db conneted...");
    })
@@ -68,3 +72,4 @@ app.post('/login',async (req, res)=>{
       }
    }
 })
+
