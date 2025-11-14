@@ -2,15 +2,18 @@ let express= require('express')
    let mongoose=     require('mongoose')
 let User=    require('./user')
 let bcrypt=    require('bcrypt')
+
+let cors = require('cors')
 let jwt=    require('jsonwebtoken')
 
 
 
-  mongoose.connect("mongodb://127.0.0.1:27017/5thSem").
+  mongoose.connect("mongodb://127.0.0.1:27017/RBAC").
   then(()=>{
    console.log("db....");
   })
   let app=     express()
+ app.use(cors())
   app.use(express.json())
 
 //   app.use((req,res)=>{
