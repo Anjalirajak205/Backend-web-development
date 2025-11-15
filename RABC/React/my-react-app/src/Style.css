@@ -4,16 +4,18 @@
     font-family: sans-serif;
 }
 
-.mainDiv{
+.mainDiv
+{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-    /* margin: auto; */
 }
-fieldset{
+
+fieldset
+{
     width: 400px;
     height: 400px;
     display: flex;
@@ -24,21 +26,24 @@ fieldset{
     background-color: rgb(204, 223, 241);
 }
 
-input{
+input
+{
     width: 80%;
     height: 40px;
     font-size: 17px;
     border-radius: 2px;
 }
 
-button{
+button
+{
     width: 80px;
     height: 30px;
     font-size: 18px;
     border-radius: 8px;
 }
 
-#linkTag{
+#linkTag
+{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,7 +51,8 @@ button{
     text-decoration: none;
 }
 
-.fields{
+.fields
+{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -54,14 +60,16 @@ button{
     align-items: center;
 }
 
-#role{
+#role
+{
     width: 80%;
     height: 40px;
     font-size: 17px;
     border-radius: 2px;
 }
 
-#btn{
+#btn
+{
     width: max-content;
     height: max-content;
 }
