@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react';
 
 const ForgetPassword = () => {
-    let [input, setInput] = useState({
+      let [input, setInput] = useState({
         email:""
     });
     function fun1(e){
