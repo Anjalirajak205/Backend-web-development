@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-
 import { createClient } from '@supabase/supabase-js';
 
 // const supabaseUrl = "https://veepttbflvovmacaykdt.supabase.co";

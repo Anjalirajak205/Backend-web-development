@@ -1,9 +1,10 @@
+
 let express = require('express')
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const User = require("./user");
+const User = require("./User");
 
 let mongoose  = require('mongoose');
 let cors = require('cors')
@@ -137,4 +138,3 @@ app.listen(4000,() => {
     console.log("server is running on port no. 4000");
     
 })
-
