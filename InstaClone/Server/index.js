@@ -345,20 +345,61 @@ app.post("/follow/:id",auth,async(req,res)=>{
     await targetUser.save()
     res.json({msg:"followed succe......"})
 
-
-
-
-
-
-
-
 })
 
+// SEARCH
 
+app.post("/search",auth,async(req,res) => {
 
+  let query = req.query.q
 
+  if(!query){
+    return res.send("query not found")
+  }
 
+  let isMatch= await User.find({
+    $or:[
+      {name:{$regex:query , $options:"i"}},
+      {email:{$regex:query , $options:"i"}}
+    ]
+  }).select("-passWord")
+  .limit(1)
+  res.json({msg:isMatch})
+  console.log(isMatch);
+  
+})
 
+// COMMENT
+
+app.post("/:postId", async (req,res)=>{
+
+  try{
+    const { text,userId }= req.body;
+    const { post } = req.params
+
+    if(!text || !userId || !postId) {
+      return res.status(400).json({ msg: "text, userId, postId required"})
+    }
+
+    const newComment = new Comment({
+      text,
+      post: postId,
+      uset: userId
+    })
+
+    await newComment.save()
+
+    return res.status(201).json({
+      msg:"Comment added successfully",
+      comment: newComment
+    })
+
+  } catch (error){
+    console.error(error);
+    return res.status(500).json({ msg: "Server error"})
+  }
+
+})
 
 app.listen(4000,()=>{
     console.log("server running on port no 4000");
