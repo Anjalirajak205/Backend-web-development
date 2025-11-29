@@ -376,7 +376,7 @@ app.post("/:postId", async (req,res)=>{
   try{
     const { text,userId }= req.body;
     const { post } = req.params
-
+        
     if(!text || !userId || !postId) {
       return res.status(400).json({ msg: "text, userId, postId required"})
     }
