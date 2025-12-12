@@ -18,7 +18,7 @@ const Upload = () => {
     setImg(e.target.files[0]);
   };
 
-  async function save() {
+  async function save(){
     if (!Img) {
       alert("Please select an image first!");
       return;
