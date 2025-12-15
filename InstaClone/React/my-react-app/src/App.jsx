@@ -5,7 +5,7 @@ import { createClient } from '@supabase/supabase-js';
 // const supabaseUrl = "https://veepttbflvovmacaykdt.supabase.co";
 // const supabaseKey =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlZXB0dGJmbHZvdm1hY2F5a2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5MTk1NzIsImV4cCI6MjA3NzQ5NTU3Mn0.51ue_QB5JHkfYotf_QFz2RX_cVQyDztAcNGuRDah-rE";
-// const supabase = createClient(supabaseUrl, supabaseKey);
+// const supabase = createClient(supabaseUrl,supabaseKey);
 
 const supabaseUrl = 'https://ovgfwbxsdfalistadsfu.supabase.co'
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im92Z2Z3YnhzZGZhbGlzdGFkc2Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NDQxMDEsImV4cCI6MjA3OTIyMDEwMX0.84W7GtLqxuEGr4vgNbt1Rph3ZY_gzjQ-szh-ltWmgUg"
@@ -65,7 +65,7 @@ const Upload = () => {
 
   return (
     <div className="bg-white min-h-screen flex flex-col items-center justify-center gap-4">
-      <input type="file" onChange={handleFileChange} className="border p-2 rounded" />
+      <input type="file" onChange = {handleFileChange} className = "border p-2 rounded" />
       <button
         onClick={save}
         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
