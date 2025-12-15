@@ -55,7 +55,9 @@ const Upload = () => {
       alert("✅ Image uploaded and saved successfully!");
       axios.post("http://loaclhost:4000/upload",{imgUrl})
       setImg(null);
-    } catch (err) {
+    } 
+    catch (err)
+     {
       console.error("❌ Upload failed:", err);
       alert("Error uploading image. Check console for details.");
     }
