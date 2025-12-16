@@ -13,7 +13,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 const Upload = () => {
   const [Img, setImg] = useState(null);
-
+  
   const handleFileChange = (e) => {
     setImg(e.target.files[0]);
   };
