@@ -5,7 +5,7 @@ const cors = require("cors");
 
 const connectDB = require("./config/db");
 const routes = require("./routes/index");
-const initSocket = require("./sockets/sockets");
+const initSocket = require("./sockets");
 
 connectDB();
 
