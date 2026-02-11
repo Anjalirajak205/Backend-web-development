@@ -1,77 +1,80 @@
-import React, { useState } from 'react'
-import "./SignUp.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./auth.css";
 
-const SignUp = () => {
-    
+export default function Signup() {
+  const nav = useNavigate();
+  const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const [msg, setMsg] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const submit = async () => {
+    setError("");
+    setMsg("");
+    setLoading(true);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+    try {
+      const res = await fetch("http://localhost:3000/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Signup Data:", formData);
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Signup failed");
+        setLoading(false);
+        return;
+      }
+
+      setMsg("Signup successful 🎉 Redirecting...");
+      
+      setTimeout(() => {
+        nav("/login");
+      }, 1500);
+
+    } catch (err) {
+      setError("Server error");
+    }
+
+    setLoading(false);
   };
 
   return (
-    <div className="signup-container">
-      <form className="signup-form" onSubmit={handleSubmit}>
+    <div className="auth-container">
+      <div className="auth-card">
         <h2>Create Account</h2>
 
+        {msg && <p className="success">{msg}</p>}
+        {error && <p className="error">{error}</p>}
+
         <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
+          placeholder="Username"
+          onChange={(e) => setForm({ ...form, username: e.target.value })}
         />
 
         <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={formData.email}
-          onChange={handleChange}
-          required
+          placeholder="Email"
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
 
         <input
-          type="password"
-          name="password"
           placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-
-        <input
           type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          required
+          onChange={(e) => setForm({ ...form, password: e.target.value })}
         />
 
-        <button type="submit">Sign Up</button>
+        <button onClick={submit} disabled={loading}>
+          {loading ? "Please wait..." : "Signup"}
+        </button>
 
-        <p className="login-text">
-          Already have an account? <span>Login</span>
+        <p className="switch">
+          Already have an account?{" "}
+          <span onClick={() => nav("/login")}>Login</span>
         </p>
-      </form>
+      </div>
     </div>
-  )
+  );
 }
-
-export default SignUp

@@ -1,55 +1,57 @@
-import React, { useState } from "react";
-import "./Login.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./auth.css";
 
-const LogIn = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+export default function Login() {
+  const nav = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+  const submit = async () => {
+    const res = await fetch("http://localhost:3000/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
     });
-  };
+    
+    const data = await res.json();
+    console.log("LOGIN:", data);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login Data:", formData);
+    if (!res.ok) {
+      alert(data.message || "Login failed");
+      return;
+    }
+
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("me", data.username);
+
+    // ⭐ direct chat open
+    nav("/chat");
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Welcome Back</h2>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Welcome Back 👋</h2>
 
         <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={formData.email}
-          onChange={handleChange}
-          required
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
-          type="password"
-          name="password"
           placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button type="submit">Login</button>
+        <button onClick={submit}>Login</button>
 
-        <p className="signup-text">
-          Don’t have an account? <span>Sign Up</span>
+        <p className="switch">
+          Don’t have an account?{" "}
+          <span onClick={() => nav("/")}>Signup</span>
         </p>
-      </form>
+      </div>
     </div>
   );
-};
-
-export default LogIn;
+}
